@@ -1,5 +1,5 @@
 puts ""
-puts "Jekyll-unified-codeblocks #{Jekyll::Unified::Codeblocks::VERSION} has been loaded :3"
+puts "Jekyll-unified-codeblocks 0.1.1 has been loaded :3"
 puts ""
 require 'kramdown/converter/html'
 
