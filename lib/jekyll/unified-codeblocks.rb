@@ -1,5 +1,5 @@
 puts ""
-puts "Jekyll-unified-codeblocks has been loaded :3"
+puts "Jekyll-unified-codeblocks #{Jekyll::Unified::Codeblocks::VERSION} has been loaded :3"
 puts ""
 require 'kramdown/converter/html'
 
@@ -13,7 +13,8 @@ module Kramdown
         highlighted_code = highlight_code(el.value, el.options[:lang] || lang, :block, hl_opts)
         if highlighted_code
           add_syntax_highlighter_to_class_attr(attr, lang || hl_opts[:default_lang])
-          "#{' ' * indent}<figure#{html_attributes(attr)}>#{highlighted_code}#{' ' * indent}</figure>\n"
+          language = lang || "plaintext"
+          "#{' ' * indent}<figure#{html_attributes(attr)}><figcaption>#{language}</figcaption>#{highlighted_code}#{' ' * indent}</figure>\n"
         else
           result = escape_html(el.value)
           result.chomp!
@@ -31,7 +32,7 @@ module Kramdown
           code_attr = {}
           code_attr['class'] = "language-#{lang}" if lang
           language = lang || "plaintext"
-          "#{' ' * indent}<figure class='highlight language-#{language}' data-lang='#{language}'><pre#{html_attributes(attr)}>" \
+          "#{' ' * indent}<figure class='highlight language-#{language}' data-lang='#{language}'><figcaption>#{language}</figcaption><pre#{html_attributes(attr)}>" \
             "<code#{html_attributes(code_attr)}>#{result}\n</code></pre></figure>\n"
         end
       end
@@ -58,7 +59,7 @@ module Jekyll
       end
       def add_code_tag(code)
         code_attrs = %(class="language-#{@lang.tr("+", "-")}" data-lang="#{@lang}")
-        %(<figure class="highlight language-#{@lang.tr("+", "-")}" data-lang="#{@lang}" ><div class="highlight"><pre class="highlight"><code #{code_attrs}>#{code.chomp}</code></pre></div></figure>)
+        %(<figure class="highlight language-#{@lang.tr("+", "-")}" data-lang="#{@lang}" ><figcaption>#{@lang}</figcaption><div class="highlight"><pre class="highlight"><code #{code_attrs}>#{code.chomp}</code></pre></div></figure>)
       end
     end
   end

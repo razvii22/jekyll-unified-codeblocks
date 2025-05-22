@@ -1,1 +1,1 @@
-require "jekyll/unified/codeblocks.rb"
+require "jekyll/unified-codeblocks.rb"
