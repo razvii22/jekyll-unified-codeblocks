@@ -5,12 +5,14 @@ A simple monkey-patched gem that unified Jekyll's `{%highlight%}` tag with Kramd
 ## HTML
 JUC generates the following `general` HTML structure for styling.
 ```html
-<figure class="language-<lang> highlighter-rouge highlight">
+<figure class="language-[lang] highlighter-rouge highlight">
+    <figcaption>[lang]</figcaption>
     <div class="highlight">
         <pre class="highlight"><code> code! </code></pre>
     </div>
 </figure>
 ```
+Where `[lang]` is the language name.
 JUC does not modify how code tags are structured, this still differs between `{% highlight %}` and code fences.
 
 ## Installation
